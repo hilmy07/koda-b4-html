@@ -1,0 +1,10 @@
+.logo {
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.ikon {
+  display: inline-block;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
