@@ -1,10 +1,255 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f0f0f0;
+}
+
+nav {
+  font-size: 0;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 40px;
+}
+
 .logo {
   display: inline-block;
-  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 16px;
+  height: 28px;
+  width: 125px;
+  margin-right: 900px;
+  margin-left: 100px;
 }
 
 .ikon {
   display: inline-block;
-  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 16px;
+  height: 24px;
+  width: 17px;
+}
+
+.profil {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+  height: 48px;
+  width: 226px;
+  margin-left: 30px;
+}
+
+main {
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 800px;
+  height: 672px;
+  background-color: white;
+}
+
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #ff5f26;
+  line-height: 100%;
+  letter-spacing: 1px;
+  padding-top: 40px;
+  padding-left: 40px;
+}
+
+.todoList {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: #293038;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-top: 10px;
+  padding-left: 40px;
+}
+
+.todoDescription {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #7a7f83;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-top: -10px;
+  padding-left: 40px;
+  width: 213px;
+  font-style: regular;
+}
+
+.add-button {
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  height: 48px;
+  width: 183px;
+  background-color: #ff5f26;
+  color: white;
+  border: none;
+  border-radius: 60px;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.add-button img {
+  vertical-align: middle;
+  height: 24px;
+  width: 24px;
+}
+
+.header {
+  position: relative;
+}
+
+.header > div {
+  display: inline-block;
+}
+
+.header2 {
+  position: absolute;
+  top: 55px;
+  right: 40px;
+}
+
+.content {
+  position: relative;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  position: relative;
+  margin-top: -20px;
+}
+
+.content > div {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.content2 {
+  position: static;
+}
+
+.selectDate {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  height: 48px;
+  width: 183px;
+  background-color: white;
+  color: #ff5f26;
+  border: 1px solid #ff5f26;
+  border-radius: 60px;
+  gap: 8px;
+  cursor: pointer;
+  margin-left: 475px;
+  margin-top: 20px;
+}
+
+.content1 h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #7a7f83;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin: 0;
+}
+
+.task {
+  margin-left: 40px;
+  margin-top: 10px;
+}
+
+.task-item {
+  position: relative;
+  padding: 8px 0;
+}
+
+.task-item .chevron {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.task-item input[type="radio"] {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.task-item label {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.task-item .badge {
+  display: inline-block;
+  background-color: #ffe3d6;
+  color: #ff5f26;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.task-item .desc {
+  display: block;
+  margin: 4px 0 0 28px;
+  font-size: 14px;
+  color: #7a7f83;
+}
+
+hr {
+  margin-top: 250px;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+.selesai {
+  display: inline-block;
+  position: absolute;
+  vertical-align: middle;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #7a7f83;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-top: 10px;
+  padding-left: 80px;
+  width: 213px;
+  font-style: regular;
+}
+
+.arrow {
+  position: absolute;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 40px;
+  margin-top: 5px;
+}
+
+footer {
+  position: relative;
 }
