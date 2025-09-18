@@ -4,15 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
       <nav>
         <img class="logo" src="assets/logo.png" alt="Logo" />
-        <img class="ikon" src="assets/ikon.png" alt="Icon" />
+        <img class="ikon" src="assets/Notification.png" alt="Ikon" />
+        <img class="profil" src="assets/userProfile.png" alt="Profil" />
       </nav>
     </header>
-    <main></main>
+    <main>
+      <div class="header">
+        <div>
+          <h1>My Tasks</h1>
+          <h2 class="todoList">To Do List</h2>
+          <p class="todoDescription">Buat list tugas harian saya</p>
+        </div>
+        <div class="header2">
+          <button class="add-button">
+            <img src="assets/plus.png" alt="" /> <span>Tambah Tugas</span>
+          </button>
+        </div>
+      </div>
+      <div class="content">
+        <div class="content1">
+          <h2>Sort By</h2>
+        </div>
+        <div class="content2">
+          <select class="selectDate">
+            <option value="date">By Tanggal</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-item">
+          <input type="radio" id="productDesign" name="task" />
+          <label for="productDesign">Product Design</label>
+          <span class="badge">Hari ini</span>
+          <p class="desc">Tugas untuk design team</p>
+          <img class="chevron" src="assets/chevron.png" alt="" />
+        </div>
+
+        <div class="task-item">
+          <input type="radio" id="development" name="task" />
+          <label for="development">Development</label>
+          <span class="badge">15 Juni 2022</span>
+          <img class="chevron" src="assets/chevron.png" alt="" />
+        </div>
+
+        <div class="task-item">
+          <input type="radio" id="launching" name="task" />
+          <label for="launching">Launching Wazwez Website</label>
+          <span class="badge">20 Juni 2022</span>
+          <img class="chevron" src="assets/chevron.png" alt="" />
+        </div>
+      </div>
+
+      <footer>
+        <hr />
+        <img class="arrow" src="assets/arrow.png" alt="arrow" />
+        <p class="selesai">Terselesaikan (3 tugas)</p>
+      </footer>
+    </main>
   </body>
 </html>
