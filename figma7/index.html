@@ -35,7 +35,7 @@
   </head>
 
   <body class="bg-[#f0f0f0] m-0 font-main">
-    <header class="mt-6 px-4 lg:px-[80px]">
+    <header class="mt-6 px-2 lg:px-[80px]">
       <nav class="flex justify-between items-center max-w-[1440px] mx-auto">
         <!-- Logo -->
         <img src="assets/logo.png" class="brightness-125" alt="logo" />
@@ -51,7 +51,7 @@
           <img
             src="assets/Krozeo Jupiter.png"
             alt="Krozeo"
-            class="w-[130px] h-[18px]"
+            class="hidden sm:block w-[130px] h-[18px]"
           />
           <img
             src="assets/Arrow - Down 2.png"
@@ -63,7 +63,7 @@
     </header>
 
     <main
-      class="w-full max-w-[800px] bg-white mt-6 mx-auto rounded-lg p-6 sm:p-10 mb-[40px] px-4"
+      class="w-[96%] max-w-[800px] bg-white mt-6 mx-auto rounded-lg p-6 sm:p-10 mb-[40px] px-4"
     >
       <!-- Header Task -->
       <div
@@ -107,7 +107,7 @@
         <!-- Popup -->
         <div
           id="sort-popup"
-          class="hidden absolute right-0 mt-2 w-64 bg-white border border-gray-300 rounded-lg shadow-lg flex flex-col gap-3 p-6 z-20 top-[50px] w-[300px] h-[144px]"
+          class="hidden absolute z-20 right-0 mt-2 w-64 bg-white border border-gray-300 rounded-lg shadow-lg flex flex-col gap-3 p-6 top-[50px] w-[300px] h-[144px] z-300"
         >
           <label class="flex justify-between items-center cursor-pointer">
             <span class="font-medium text-grayText">By Tanggal</span>
@@ -206,7 +206,7 @@
 
           <!-- Popup menu -->
           <div
-            class="hidden absolute top-full right-0 lg:right-[280px] z-50 p-[20px] mt-[6px] bg-white border border-gray-300 rounded-lg shadow-md min-w-[160px] flex-col overflow-hidden peer-checked:flex"
+            class="hidden absolute top-full right-0 lg:right-[280px] z-10 p-[20px] mt-[6px] bg-white border border-gray-300 rounded-lg shadow-md min-w-[160px] flex-col overflow-hidden peer-checked:flex"
           >
             <button
               class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-left"
@@ -365,6 +365,111 @@
         <img src="assets/chevron.png" alt="" class="ml-auto w-6 h-6" />
       </div>
 
+      <!-- CONTAINER UNTUK TASK -->
+      <div id="dynamic-tasks" class="flex flex-col mt-4 space-y-4"></div>
+
+      <!-- TEMPLATE TASK -->
+      <template id="task-template">
+        <details class="task-item flex flex-col">
+          <summary class="flex items-center relative cursor-pointer">
+            <!-- checkbox -->
+            <input
+              type="radio"
+              class="appearance-none w-7 h-7 border-2 border-gray-300 rounded-full checked:bg-primary checked:border-primary cursor-pointer"
+            />
+
+            <!-- judul -->
+            <span class="task-title ml-[22px] text-[18px] font-bold"></span>
+
+            <!-- tanggal -->
+            <p
+              class="task-date ml-4 bg-chipBg px-3 py-2 rounded-full text-primary m-0"
+            ></p>
+
+            <!-- titik 3 -->
+            <input
+              type="checkbox"
+              class="hidden peer task-menu-toggle"
+              id="menu-toggle-{{id}}"
+            />
+            <label for="menu-toggle-{{id}}" class="cursor-pointer ml-3">
+              <img src="assets/more-vertical.png" class="w-[18px] h-[18px]" />
+            </label>
+
+            <!-- menu popup -->
+            <div
+              class="hidden absolute top-full right-0 lg:right-[280px] z-10 p-[20px] mt-[6px] bg-white border border-gray-300 rounded-lg shadow-md min-w-[160px] flex-col overflow-hidden peer-checked:flex"
+            >
+              <button
+                class="btn-rename flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-left"
+              >
+                ✏️ <span>Rename task</span>
+              </button>
+              <button
+                class="btn-delete flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-left"
+              >
+                🗑️ <span>Delete task</span>
+              </button>
+            </div>
+
+            <!-- arrow -->
+            <img
+              src="assets/Arrow - Up 2.png"
+              class="chevron ml-auto transition-transform duration-300"
+            />
+          </summary>
+
+          <!-- deskripsi -->
+          <p class="task-desc ml-[57px] text-grayText text-[14px] m-0"></p>
+
+          <!-- SUBTASK -->
+          <div class="px-3 py-2 mt-4 bg-taskBg rounded-lg font-main">
+            <div class="flex justify-between items-center mt-4">
+              <span class="font-bold text-[16px] ml-4 text-[#293038]"
+                >Subtask</span
+              >
+              <button
+                class="btn-add-subtask flex items-center gap-[6px] bg-white text-primary border border-primary rounded-full px-[10px] py-[6px] text-[14px] cursor-pointer"
+              >
+                <img src="assets/plusBaru.png" alt="plus" />
+                <span class="font-mulish text-[12px] font-semibold"
+                  >Tambah</span
+                >
+              </button>
+            </div>
+
+            <div class="bg-taskBg rounded-lg font-main subtask-list">
+              <!-- Subtask template -->
+              <div
+                class="flex justify-between items-center mt-4 subtask-item hidden"
+              >
+                <div class="flex items-center gap-[14px] pl-4">
+                  <input
+                    type="checkbox"
+                    class="peer subtask-checkbox absolute opacity-0 w-7 h-7"
+                  />
+                  <label
+                    class="flex items-center justify-center w-[28px] h-[28px] border-2 border-gray-300 rounded-full bg-white cursor-pointer peer-checked:bg-orange-500 transition-colors"
+                  >
+                    <span class="hidden text-white text-[16px] font-bold"
+                      >✔</span
+                    >
+                  </label>
+                  <span
+                    class="text-[16px] font-normal text-[#293038] subtask-name peer-checked:line-through peer-checked:opacity-60"
+                  ></span>
+                </div>
+                <img
+                  src="assets/trash.png"
+                  alt="trash"
+                  class="cursor-pointer subtask-delete"
+                />
+              </div>
+            </div>
+          </div>
+        </details>
+      </template>
+
       <hr class="mt-[28px]" />
 
       <!-- Footer -->
@@ -485,91 +590,10 @@
       </footer>
     </main>
 
-    <script>
-      const titles = ["Figma 7", "Desain Website", "Project UI/UX"];
-      let i = 0;
-      setInterval(() => {
-        document.title = titles[i];
-        i = (i + 1) % titles.length;
-      }, 1500);
-
-      const details = document.querySelector("details");
-      const chevron = details.querySelector(".chevron");
-
-      details.addEventListener("toggle", () => {
-        if (details.open) {
-          // kalau terbuka → panah hadap atas
-          chevron.src = "assets/Arrow - Up 2.png";
-        } else {
-          // kalau tertutup → panah hadap bawah
-          chevron.src = "assets/Arrow - Down 2.png";
-          chevron.style.height = "24px";
-          chevron.style.width = "24px";
-        }
-      });
-
-      const btnAdd = document.getElementById("btn-add-task");
-      const pendingContainer = document.getElementById("pending-container");
-      const btnSave = document.getElementById("btn-save-task");
-
-      // Tampilkan/Hide pending container saat klik "Tambah Tugas"
-      btnAdd.addEventListener("click", () => {
-        pendingContainer.classList.toggle("hidden");
-      });
-
-      // Simpan task ke localStorage
-      btnSave.addEventListener("click", () => {
-        const name = document.getElementById("task-name").value.trim();
-        const desc = document.getElementById("task-desc").value.trim();
-        const date = document.getElementById("task-date").value;
-
-        if (!name) {
-          alert("Nama tugas wajib diisi!");
-          return;
-        }
-
-        const task = { name, desc, date };
-
-        // Ambil data lama dari localStorage
-        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        tasks.push(task);
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-
-        // Reset form
-        document.getElementById("task-name").value = "";
-        document.getElementById("task-desc").value = "";
-        document.getElementById("task-date").value = "";
-
-        // Sembunyikan pending container
-        pendingContainer.classList.add("hidden");
-
-        alert("Tugas berhasil disimpan!");
-      });
-
-      // tampilkan sort popup ketika btn diklik
-      const btnSort = document.getElementById("btn-sort");
-      const sortPopup = document.getElementById("sort-popup");
-
-      btnSort.addEventListener("click", () => {
-        sortPopup.classList.toggle("hidden");
-      });
-
-      // Klik di luar popup, hilangkan
-      document.addEventListener("click", (e) => {
-        if (!btnSort.contains(e.target) && !sortPopup.contains(e.target)) {
-          sortPopup.classList.add("hidden");
-        }
-      });
-
-      // konfigurasi footer
-      const toggleCompleted = document.getElementById("toggle-completed");
-      const completedTasks = document.getElementById("completed-tasks");
-      const arrow = toggleCompleted.querySelector(".arrow");
-
-      toggleCompleted.addEventListener("click", () => {
-        completedTasks.classList.toggle("hidden");
-        arrow.classList.toggle("rotate-90"); // kasih animasi rotasi arrow
-      });
-    </script>
+    <!-- RequireJS -->
+    <script
+      data-main="app"
+      src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
+    ></script>
   </body>
 </html>
