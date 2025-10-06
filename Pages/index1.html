@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">figma1</title>
+    <link rel="stylesheet" href="css/styles1.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <!-- Logo -->
+        <img src="assets/logo.png" class="logo" alt="logo" />
+
+        <!-- Right section -->
+        <div class="right-section">
+          <img src="assets/Notification.png" class="icon" alt="notification" />
+          <img src="assets/userProfile.png" class="icon user" alt="user" />
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Header Task -->
+      <div class="header-task">
+        <div class="task-info">
+          <h2>My Task</h2>
+          <h1>To Do List</h1>
+          <p>Buat list tugas harian saya</p>
+        </div>
+
+        <button class="btn-primary">
+          <img src="assets/Plus.png" alt="" />
+          <p>Tambah tugas</p>
+        </button>
+      </div>
+
+      <!-- Sort Section -->
+      <div class="sort-section">
+        <p>Sort By</p>
+        <button class="btn-outline">
+          <span>By Tanggal</span>
+          <img src="assets/chevron.png" alt="" />
+        </button>
+      </div>
+
+      <!-- Task List -->
+      <div class="task">
+        <div class="task-row">
+          <input type="radio" />
+          <span><b>Product Design</b></span>
+          <p class="chip">Hari ini</p>
+          <img src="assets/chevron.png" alt="" class="chevron" />
+        </div>
+        <p class="desc">Tugas untuk design team</p>
+      </div>
+
+      <div class="task">
+        <div class="task-row">
+          <input type="radio" />
+          <span><b>Development</b></span>
+          <p class="chip">15 Juni 2022</p>
+          <img src="assets/chevron.png" alt="" class="chevron dev" />
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-row">
+          <input type="radio" />
+          <span><b>Launching Wazwez Website</b></span>
+          <p class="chip">20 Juni 2022</p>
+          <img src="assets/chevron.png" alt="" class="chevron launch" />
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Footer -->
+      <footer>
+        <div class="footer-row">
+          <img class="arrow" src="assets/arrow.png" alt="arrow" />
+          <p>Terselesaikan (3 tugas)</p>
+        </div>
+      </footer>
+    </main>
+  </body>
+  <script>
+    const titles = ["Figma 1", "Desain Website", "Project UI/UX"];
+    let i = 0;
+    setInterval(() => {
+      document.title = titles[i];
+      i = (i + 1) % titles.length;
+    }, 1500);
+  </script>
+</html>
