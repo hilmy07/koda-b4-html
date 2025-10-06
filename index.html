@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">figma7</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ff5f26",
+              grayText: "#293038",
+              chipBg: "#ffebd3",
+              taskBg: "#f0f0f0",
+            },
+            fontFamily: {
+              main: ["Poppins", "sans-serif"],
+              mulish: ["Mulish", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html,
+      body {
+        overflow-x: hidden; /* cegah geser horizontal */
+      }
+      input[type="checkbox"]:checked + label span {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body class="bg-[#f0f0f0] m-0 font-main">
+    <header class="mt-6 px-2 lg:px-[80px]">
+      <nav class="flex justify-between items-center max-w-[1440px] mx-auto">
+        <!-- Logo -->
+        <img src="assets/logo.png" class="brightness-125" alt="logo" />
+
+        <!-- Right section -->
+        <div class="flex items-center gap-[10px]">
+          <img
+            src="assets/Notification.png"
+            class="brightness-125"
+            alt="notification"
+          />
+          <img src="assets/Group 30.png" alt="user-foto" class="ml-[10px]" />
+          <img
+            src="assets/Krozeo Jupiter.png"
+            alt="Krozeo"
+            class="hidden sm:block w-[130px] h-[18px]"
+          />
+          <img
+            src="assets/Arrow - Down 2.png"
+            alt="arrow down"
+            class="w-[24px] h-[24px]"
+          />
+        </div>
+      </nav>
+    </header>
+
+    <main
+      class="w-[96%] max-w-[800px] bg-white mt-6 mx-auto rounded-lg p-6 sm:p-10 mb-[40px] px-4"
+    >
+      <!-- Header Task -->
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+      >
+        <div>
+          <h2 class="text-primary m-0 text-[16px]">My Task</h2>
+          <h1 class="mt-[10px] mb-0 text-[24px]">To Do List</h1>
+          <p class="text-grayText mt-[12px] mb-0 text-[16px]">
+            Buat list tugas harian saya
+          </p>
+        </div>
+
+        <button
+          id="btn-add-task"
+          class="appearance-none flex items-center !bg-primary gap-2 border-none rounded-full px-[15px] py-[12px] cursor-pointer"
+        >
+          <img src="assets/Plus.png" class="w-6 h-6" alt="" />
+          <p class="text-white text-[16px] font-semibold m-0">Tambah tugas</p>
+        </button>
+      </div>
+
+      <!-- Sort Section -->
+      <div
+        class="flex justify-between items-center mt-5 flex-wrap gap-2 relative"
+      >
+        <p class="m-0 text-[16px] text-grayText">Sort By</p>
+        <!-- Button Toggle Popup -->
+        <button
+          id="btn-sort"
+          class="flex items-center gap-2 px-4 py-2 border border-primary rounded-full bg-white cursor-pointer relative z-10"
+        >
+          <span class="text-[16px] text-primary font-semibold">By Tanggal</span>
+          <img
+            src="assets/chevron.png"
+            alt=""
+            class="w-6 h-6 invert-[9%] sepia-[92%] saturate-[7494%] hue-rotate-[24deg] brightness-[89%] contrast-[114%]"
+          />
+        </button>
+
+        <!-- Popup -->
+        <div
+          id="sort-popup"
+          class="hidden absolute z-20 right-0 mt-2 w-64 bg-white border border-gray-300 rounded-lg shadow-lg flex flex-col gap-3 p-6 top-[50px] w-[300px] h-[144px] z-300"
+        >
+          <label class="flex justify-between items-center cursor-pointer">
+            <span class="font-medium text-grayText">By Tanggal</span>
+            <input
+              type="radio"
+              name="sort"
+              class="w-5 h-5 accent-primary"
+              checked
+            />
+          </label>
+          <label class="flex justify-between items-center cursor-pointer">
+            <span class="font-medium text-grayText">By Time</span>
+            <input type="radio" name="sort" class="w-5 h-5 accent-primary" />
+          </label>
+          <label class="flex justify-between items-center cursor-pointer">
+            <span class="font-medium text-grayText">Terbaru</span>
+            <input type="radio" name="sort" class="w-5 h-5 accent-primary" />
+          </label>
+        </div>
+      </div>
+
+      <div
+        id="pending-container"
+        class="hidden bg-taskBg mt-2 mb-2 -mx-4 sm:-mx-10 px-4 sm:px-10 py-4 space-y-4"
+      >
+        <!-- Baris input + nama tugas -->
+        <div class="flex items-center gap-4">
+          <input
+            type="radio"
+            class="w-7 h-7 border-2 border-gray-300 rounded-full cursor-pointer checked:bg-primary checked:border-primary"
+          />
+          <input
+            type="text"
+            id="task-name"
+            placeholder="Masukkan nama tugas"
+            class="w-full text-grayText text-[18px] font-semibold bg-transparent outline-none"
+          />
+        </div>
+
+        <!-- Baris deskripsi -->
+        <div class="flex items-center gap-2 ml-[50px]">
+          <img src="assets/menu.png" alt="menu" class="w-5 h-5" />
+          <input
+            type="text"
+            id="task-desc"
+            placeholder="Deskripsi Tugas (Optional)"
+            class="text-grayText text-sm w-full bg-transparent outline-none"
+          />
+        </div>
+
+        <!-- Baris tanggal -->
+        <div class="flex items-center gap-2 ml-[50px]">
+          <img src="assets/Calendar.png" alt="cal" class="w-5 h-5" />
+          <input
+            type="date"
+            id="task-date"
+            class="border border-gray-300 rounded-md px-2 py-1 text-sm"
+          />
+        </div>
+
+        <!-- Tombol simpan -->
+        <div class="flex justify-end">
+          <button
+            id="btn-save-task"
+            class="bg-primary text-white px-4 py-2 rounded-full"
+          >
+            Simpan
+          </button>
+        </div>
+      </div>
+
+      <!-- Task List -->
+      <details class="flex flex-col mt-4" open>
+        <summary class="flex items-center relative">
+          <input
+            type="radio"
+            name="product-design"
+            aria-labelledby="label-product-design"
+            class="appearance-none w-7 h-7 border-2 border-gray-300 rounded-full checked:bg-primary checked:border-primary cursor-pointer"
+          />
+          <span id="label-product-design" class="ml-[22px] text-[18px]"
+            ><b>Product Design</b></span
+          >
+          <p class="ml-4 bg-chipBg px-3 py-2 rounded-full text-primary m-0">
+            Hari ini
+          </p>
+
+          <input type="checkbox" id="menu-toggle" class="hidden peer" />
+          <label for="menu-toggle" class="cursor-pointer ml-3">
+            <img
+              src="assets/more-vertical.png"
+              alt="more"
+              class="w-[18px] h-[18px]"
+            />
+          </label>
+
+          <!-- Popup menu -->
+          <div
+            class="hidden absolute top-full right-0 lg:right-[280px] z-10 p-[20px] mt-[6px] bg-white border border-gray-300 rounded-lg shadow-md min-w-[160px] flex-col overflow-hidden peer-checked:flex"
+          >
+            <button
+              class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-left"
+            >
+              ✏️ <span>Rename task</span>
+            </button>
+            <button
+              class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-left"
+            >
+              🗑️ <span>Delete task</span>
+            </button>
+          </div>
+
+          <img
+            src="assets/Arrow - Up 2.png"
+            alt=""
+            class="chevron ml-auto transition-transform duration-300"
+          />
+        </summary>
+
+        <p class="ml-[57px] text-grayText text-[14px] m-0">
+          Tugas untuk design team
+        </p>
+
+        <!-- Subtask -->
+        <div class="bg-taskBg px-3 py-2 rounded-lg mt-4 font-main">
+          <!-- Subtask Header -->
+          <div class="flex justify-between items-center mt-4">
+            <span class="font-bold text-[16px] ml-4 text-[#293038]"
+              >Subtask</span
+            >
+            <button
+              class="flex items-center gap-[6px] bg-white text-primary border border-primary rounded-full px-[10px] py-[6px] text-[14px] cursor-pointer"
+            >
+              <img src="assets/plusBaru.png" alt="plus" />
+              <span class="font-mulish text-[12px] font-semibold">Tambah</span>
+            </button>
+          </div>
+
+          <!-- Subtasks -->
+          <!-- gunakan flex-col agar stack rapi di layar kecil -->
+          <div class="flex flex-col">
+            <!-- Subtask 1 -->
+            <div class="flex justify-between items-center mt-4">
+              <div class="flex items-center gap-[14px] pl-4">
+                <input type="checkbox" id="st1" class="hidden peer" />
+                <label
+                  for="st1"
+                  class="flex items-center justify-center w-[28px] h-[28px] border-2 border-gray-300 rounded-full bg-white cursor-pointer peer-checked:bg-orange-500 transition-colors"
+                >
+                  <span class="hidden text-white text-[16px] font-bold">✔</span>
+                </label>
+                <span
+                  class="text-[16px] font-normal text-[#293038] peer-checked:line-through peer-checked:opacity-60"
+                >
+                  Design review
+                </span>
+              </div>
+              <img src="assets/trash.png" alt="trash" class="cursor-pointer" />
+            </div>
+
+            <!-- Subtask 2 -->
+            <div class="flex justify-between items-center mt-4">
+              <div class="flex items-center gap-[14px] pl-4">
+                <input type="checkbox" id="st2" class="hidden peer" />
+                <label
+                  for="st2"
+                  class="flex items-center justify-center w-[28px] h-[28px] border-2 border-gray-300 rounded-full bg-white cursor-pointer peer-checked:bg-orange-500 transition-colors"
+                >
+                  <span class="hidden text-white text-[16px] font-bold">✔</span>
+                </label>
+                <span
+                  class="text-[16px] font-normal text-[#293038] peer-checked:line-through peer-checked:opacity-60"
+                >
+                  Low-Fidelity design
+                </span>
+              </div>
+              <img src="assets/trash.png" alt="trash" class="cursor-pointer" />
+            </div>
+
+            <!-- Subtask 3 -->
+            <div class="flex justify-between items-center mt-4">
+              <div class="flex items-center gap-[14px] pl-4">
+                <input type="checkbox" id="st3" class="hidden peer" />
+                <label
+                  for="st3"
+                  class="flex items-center justify-center w-[28px] h-[28px] border-2 border-gray-300 rounded-full bg-white cursor-pointer peer-checked:bg-orange-500 transition-colors"
+                >
+                  <span class="hidden text-white text-[16px] font-bold">✔</span>
+                </label>
+                <span
+                  class="text-[16px] font-normal text-[#293038] peer-checked:line-through peer-checked:opacity-60"
+                >
+                  High-Fidelity design
+                </span>
+              </div>
+              <img src="assets/trash.png" alt="trash" class="cursor-pointer" />
+            </div>
+
+            <!-- Subtask 4 -->
+            <div class="flex justify-between items-center mt-4">
+              <div class="flex items-center gap-[14px] pl-4">
+                <input type="checkbox" id="st4" class="hidden peer" />
+                <label
+                  for="st4"
+                  class="flex items-center justify-center w-[28px] h-[28px] border-2 border-gray-300 rounded-full bg-white cursor-pointer peer-checked:bg-orange-500 transition-colors"
+                >
+                  <span class="hidden text-white text-[16px] font-bold">✔</span>
+                </label>
+                <span
+                  class="text-[16px] font-normal text-[#293038] peer-checked:line-through peer-checked:opacity-60"
+                >
+                  Design Guidelines
+                </span>
+              </div>
+              <img src="assets/trash.png" alt="trash" class="cursor-pointer" />
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Task lainnya -->
+      <div class="flex flex-col mt-4">
+        <div class="flex items-center">
+          <input
+            type="radio"
+            aria-labelledby="label-development"
+            class="appearance-none w-7 h-7 border-2 border-gray-300 rounded-full checked:bg-primary checked:border-primary cursor-pointer"
+          />
+          <span id="label-development" class="ml-[22px] text-[18px]"
+            ><b>Development</b></span
+          >
+          <p class="ml-4 bg-chipBg px-3 py-2 rounded-full text-primary m-0">
+            15 Juni 2022
+          </p>
+          <img src="assets/chevron.png" alt="" class="ml-auto w-6 h-6" />
+        </div>
+      </div>
+
+      <div class="flex items-center flex-nowrap mt-4">
+        <input
+          type="radio"
+          aria-labelledby="label-launching"
+          class="shrink-0 appearance-none w-7 h-7 border-2 border-gray-300 rounded-full checked:bg-primary checked:border-primary cursor-pointer overflow-hidden"
+        />
+        <span
+          id="label-launching"
+          class="ml-[22px] text-[18px] truncate min-w-0"
+          ><b>Launching Wazwez Website</b></span
+        >
+        <p
+          class="ml-4 bg-chipBg px-3 py-2 rounded-full text-primary m-0 whitespace-nowrap"
+        >
+          20 Juni 2022
+        </p>
+        <img src="assets/chevron.png" alt="" class="ml-auto w-6 h-6" />
+      </div>
+
+      <!-- CONTAINER UNTUK TASK -->
+      <div id="dynamic-tasks" class="flex flex-col mt-4 space-y-4"></div>
+
+      <!-- TEMPLATE TASK -->
+      <template id="task-template">
+        <details class="task-item flex flex-col">
+          <summary class="flex items-center relative cursor-pointer">
+            <!-- checkbox -->
+            <input
+              type="radio"
+              class="appearance-none w-7 h-7 border-2 border-gray-300 rounded-full checked:bg-primary checked:border-primary cursor-pointer"
+            />
+
+            <!-- judul -->
+            <span class="task-title ml-[22px] text-[18px] font-bold"></span>
+
+            <!-- tanggal -->
+            <p
+              class="task-date ml-4 bg-chipBg px-3 py-2 rounded-full text-primary m-0"
+            ></p>
+
+            <!-- titik 3 -->
+            <input
+              type="checkbox"
+              class="hidden peer task-menu-toggle"
+              id="menu-toggle-{{id}}"
+            />
+            <label for="menu-toggle-{{id}}" class="cursor-pointer ml-3">
+              <img src="assets/more-vertical.png" class="w-[18px] h-[18px]" />
+            </label>
+
+            <!-- menu popup -->
+            <div
+              class="hidden absolute top-full right-0 lg:right-[280px] z-10 p-[20px] mt-[6px] bg-white border border-gray-300 rounded-lg shadow-md min-w-[160px] flex-col overflow-hidden peer-checked:flex"
+            >
+              <button
+                class="btn-rename flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-left"
+              >
+                ✏️ <span>Rename task</span>
+              </button>
+              <button
+                class="btn-delete flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-left"
+              >
+                🗑️ <span>Delete task</span>
+              </button>
+            </div>
+
+            <!-- arrow -->
+            <img
+              src="assets/Arrow - Up 2.png"
+              class="chevron ml-auto transition-transform duration-300"
+            />
+          </summary>
+
+          <!-- deskripsi -->
+          <p class="task-desc ml-[57px] text-grayText text-[14px] m-0"></p>
+
+          <!-- SUBTASK -->
+          <div class="px-3 py-2 mt-4 bg-taskBg rounded-lg font-main">
+            <div class="flex justify-between items-center mt-4">
+              <span class="font-bold text-[16px] ml-4 text-[#293038]"
+                >Subtask</span
+              >
+              <button
+                class="btn-add-subtask flex items-center gap-[6px] bg-white text-primary border border-primary rounded-full px-[10px] py-[6px] text-[14px] cursor-pointer"
+              >
+                <img src="assets/plusBaru.png" alt="plus" />
+                <span class="font-mulish text-[12px] font-semibold"
+                  >Tambah</span
+                >
+              </button>
+            </div>
+
+            <div class="bg-taskBg rounded-lg font-main subtask-list">
+              <!-- Subtask template -->
+              <div
+                class="flex justify-between items-center mt-4 subtask-item hidden"
+              >
+                <div class="flex items-center gap-[14px] pl-4">
+                  <input
+                    type="checkbox"
+                    class="peer subtask-checkbox absolute opacity-0 w-7 h-7"
+                  />
+                  <label
+                    class="flex items-center justify-center w-[28px] h-[28px] border-2 border-gray-300 rounded-full bg-white cursor-pointer peer-checked:bg-orange-500 transition-colors"
+                  >
+                    <span class="hidden text-white text-[16px] font-bold"
+                      >✔</span
+                    >
+                  </label>
+                  <span
+                    class="text-[16px] font-normal text-[#293038] subtask-name peer-checked:line-through peer-checked:opacity-60"
+                  ></span>
+                </div>
+                <img
+                  src="assets/trash.png"
+                  alt="trash"
+                  class="cursor-pointer subtask-delete"
+                />
+              </div>
+            </div>
+          </div>
+        </details>
+      </template>
+
+      <hr class="mt-[28px]" />
+
+      <!-- Footer -->
+      <footer class="flex flex-col mt-[15px]">
+        <div
+          id="toggle-completed"
+          class="flex items-center mb-0 cursor-pointer select-none"
+        >
+          <img
+            class="arrow transition-transform duration-300"
+            src="assets/arrow.png"
+            alt="arrow"
+          />
+          <p class="text-grayText text-[18px] ml-2">Terselesaikan (3 tugas)</p>
+        </div>
+
+        <!-- Container daftar tugas terselesaikan -->
+        <div
+          id="completed-tasks"
+          class="flex flex-col mt-[24px] space-y-4 hidden"
+        >
+          <!-- Task Item 1 -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <label
+                class="relative inline-flex items-center cursor-pointer h-[28px]"
+              >
+                <input
+                  type="radio"
+                  name="pilihan"
+                  checked
+                  class="hidden peer"
+                />
+                <span
+                  class="inline-block w-[28px] h-[28px] border-2 border-[#ff7525] rounded-full bg-[#ff7525] relative peer-checked:bg-[#ff7525]"
+                >
+                  <span
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[18px] font-bold"
+                    >✔</span
+                  >
+                </span>
+              </label>
+
+              <p
+                class="ml-[5px] font-[Poppins] line-through h-[28px] flex items-center"
+              >
+                Requirements Details
+              </p>
+            </div>
+
+            <img src="assets/chevron.png" alt="" class="chevron self-center" />
+          </div>
+
+          <!-- Task Item 2 -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <label
+                class="relative inline-flex items-center cursor-pointer h-[28px]"
+              >
+                <input
+                  type="radio"
+                  name="pilihan"
+                  checked
+                  class="hidden peer"
+                />
+                <span
+                  class="inline-block w-[28px] h-[28px] border-2 border-[#ff7525] rounded-full bg-[#ff7525] relative peer-checked:bg-[#ff7525]"
+                >
+                  <span
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[18px] font-bold"
+                    >✔</span
+                  >
+                </span>
+              </label>
+
+              <p
+                class="ml-[5px] font-[Poppins] line-through h-[28px] flex items-center"
+              >
+                Backlog Teams
+              </p>
+            </div>
+
+            <img src="assets/chevron.png" alt="" class="chevron self-center" />
+          </div>
+
+          <!-- Task Item 3 -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <label
+                class="relative inline-flex items-center cursor-pointer h-[28px]"
+              >
+                <input
+                  type="radio"
+                  name="pilihan"
+                  checked
+                  class="hidden peer"
+                />
+                <span
+                  class="inline-block w-[28px] h-[28px] border-2 border-[#ff7525] rounded-full bg-[#ff7525] relative peer-checked:bg-[#ff7525]"
+                >
+                  <span
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[18px] font-bold"
+                    >✔</span
+                  >
+                </span>
+              </label>
+
+              <p
+                class="ml-[5px] font-[Poppins] line-through h-[28px] flex items-center"
+              >
+                Meeting With Teams
+              </p>
+            </div>
+
+            <img src="assets/chevron.png" alt="" class="chevron self-center" />
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- RequireJS -->
+    <script
+      data-main="app"
+      src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
+    ></script>
+  </body>
+</html>
